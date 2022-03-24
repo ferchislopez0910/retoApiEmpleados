@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "280e0ae6-1102-4b2e-95b8-25a9ce8b13d7",
+		"name": "ApiEmpleadosKruger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ListarEmpleados",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/empleado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"empleado"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListarEmpleadosVacunados",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/empleado/vacunacion?tieneVacuna=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"empleado",
+						"vacunacion"
+					],
+					"query": [
+						{
+							"key": "tieneVacuna",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CrearEmpleado",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 1017137991,\r\n  \"nombres\": \"Maria\",\r\n  \"apellidos\": \"Lopez\",\r\n  \"email\": \"ferchislopez0910@gmail.com\",\r\n  \"fechaNacimiento\": \"1986-09-10\",\r\n  \"direccion\": \"Cl 76BB 82F 75\",\r\n  \"telefono\": \"3007371435\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/empleado/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"empleado",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ActualizarEmpleado",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedula\": 1017137991,\r\n  \"nombres\": \"Maria\",\r\n  \"apellidos\": \"Lopez\",\r\n  \"email\": \"ferchislopez0910@gmail.com\",\r\n  \"fechaNacimiento\": \"1986-09-10\",\r\n  \"direccion\": \"Cl 76BB 82F 75\",\r\n  \"telefono\": \"3007371435\",\r\n  \"tieneVacuna\": true,\r\n  \"vacunacion\": {\r\n      \"id\": 1,\r\n      \"cedula\": 1017137991,\r\n      \"tipoVacuna\": \"Sputnik\",\r\n      \"fechaVacuna\": \"2021-03-10\",\r\n      \"numeroDosis\": 2\r\n\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/empleado/1017137991",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"empleado",
+						"1017137991"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListarEmpleadoByCedula",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/empleado/1017137991",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"empleado",
+						"1017137991"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

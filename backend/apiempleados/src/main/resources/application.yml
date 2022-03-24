@@ -3,6 +3,12 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/apiempleadoskruger
     username: dev
     password: dev
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
+  security:
+    user:
+      name: admin
+      password: 1234
   jpa:
     hibernate:
       ddl-auto: update

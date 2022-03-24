@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kruger.apiempleados.common.Util;
 import com.kruger.apiempleados.exceptions.EmpleadoNoEncontradoExcepcion;
 import com.kruger.apiempleados.model.entity.Empleado;
+import com.kruger.apiempleados.model.entity.Vacunacion;
 import com.kruger.apiempleados.services.EmpleadoServiceInterface;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,9 +38,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 @RestController
 @RequestMapping("/api/v1/empleado")
 public class EmpleadoController {
+	
 	@Autowired
 	private EmpleadoServiceInterface emplService;
-	
 	
 	@PostMapping()
 	@Operation(summary="Crear empleado", description="Crear empleado en el sistema", tags= {"Empleado"})
@@ -50,7 +53,6 @@ public class EmpleadoController {
 	@ResponseBody
 	public Empleado crearEmpleado(@Valid @RequestBody Empleado employee) {
 		return emplService.createEmployee(employee);
-		
 	}
 	
 	@GetMapping()
@@ -66,6 +68,21 @@ public class EmpleadoController {
 		return emplService.listEmployees();
 		
 	}
+	
+	@GetMapping("/vacunacion")
+	@Operation(summary="Listar empleados vacunados", description="Listar empleado del sistema", tags= {"Empleado"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Success - Empleado creado",
+					content = {@Content(mediaType = "application/json",
+					schema = @Schema(implementation = Empleado.class))}),
+			@ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+		    @ApiResponse(responseCode = "404", description = " Page Not Found", content = @Content)})
+	@ResponseBody
+	public List<Empleado> listarEmpleadoVacunado(@RequestParam(value = "tieneVacuna", required= true) boolean tieneVacuna) {
+		return emplService.listEmployeesByStatus(tieneVacuna);
+		
+	}
+	
 	
 	@GetMapping("/{id}")
 	@Operation(summary="Consultar empleado", description="Obtener empleado registrado en el sistema", tags= {"Empleado"})

@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kruger.apiempleados.common.Util;
 import com.kruger.apiempleados.model.entity.Empleado;
+import com.kruger.apiempleados.model.entity.Vacunacion;
 import com.kruger.apiempleados.repository.EmpleadoRepository;
 
 @Service
@@ -21,6 +23,9 @@ public class EmpleadoService implements EmpleadoServiceInterface{
 	
 	@Override
 	public Empleado createEmployee(Empleado employee) {
+		String contrasena = Util.createPassword(employee.getApellidos());
+		employee.setUsuario(employee.getEmail());
+		employee.setContrasena(contrasena);
 		return empRepository.save(employee);
 	}
 
@@ -34,6 +39,9 @@ public class EmpleadoService implements EmpleadoServiceInterface{
 
 	@Override
 	public Empleado updateEmployee(Empleado employee) {
+		Vacunacion vacuna = employee.getVacunacion();
+		if(vacuna != null && vacuna.getId() > 0)
+			employee.setVacunacion(vacuna);
 		return empRepository.save(employee);
 	}
 
@@ -46,6 +54,12 @@ public class EmpleadoService implements EmpleadoServiceInterface{
 	@Override
 	public Optional<Empleado> listEmployee(Long cedula) {
 		return empRepository.findById(cedula);
+	}
+
+
+	@Override
+	public List<Empleado> listEmployeesByStatus(boolean status) {
+		return empRepository.findByTieneVacuna(status);
 	}
 
 }
